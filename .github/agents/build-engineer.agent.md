@@ -5,7 +5,7 @@
 
 ## Область відповідальності
 Агент відповідає за:
-1. Створення коректної структури каталогів (`src/`, `tests/`, `.github/`, `docs/`, `agents/`, `prompts/`).
+1. Створення коректної структури каталогів (`src/`, `tests/`, `docs/`, `.github/agents/`, `.github/prompts/`, `.github/skills/`, `.github/workflows/`).
 2. Написання початкового коду застосунку (C++) та відповідних юніт-тестів.
 3. Налаштування системи складання CMake (`CMakeLists.txt`).
 4. Налаштування CI/CD процесу через GitHub Actions (файл `.github/workflows/ci.yml`) з матрицею збірки для Windows, Linux та macOS.
