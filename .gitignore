@@ -1,0 +1,14 @@
+build/
+.cache/
+*.exe
+*.o
+*.obj
+*.out
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
