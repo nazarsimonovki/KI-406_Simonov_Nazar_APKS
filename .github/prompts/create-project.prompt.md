@@ -10,6 +10,7 @@
 
 ## Очікувані файли
 - `src/main.cpp`
+- `src/addition.hpp`
 - `README.md`
 
 ## Команди перевірки

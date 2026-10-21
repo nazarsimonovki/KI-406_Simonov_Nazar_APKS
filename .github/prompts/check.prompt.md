@@ -14,8 +14,8 @@
 - Відсутні нові файли (команда лише читає).
 
 ## Команди перевірки
-- `cmake --build build`
-- `cd build && ctest`
+- `cmake --build build --config Release`
+- `ctest --test-dir build -C Release --output-on-failure`
 
 ## Повідомлення про помилку
 - "Помилка check: Проєкт не пройшов валідацію. Деталі: [Вказати причину збою: помилка збірки, впав тест, відсутній файл тощо]."
