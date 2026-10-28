@@ -2,12 +2,12 @@
 description: "Генерація CMakeLists.txt та налаштування юніт-тестів GoogleTest/CTest"
 ---
 
-# /create-build
+# @create-build.prompt.md
 
 ## Передумови
-- Успішне виконання команди `/create-project`.
+- Успішне виконання інструкції `@create-project.prompt.md`.
 - Наявність файлів `src/main.cpp` та `src/addition.hpp`.
-- Наявність навички `.github/skills/build-and-test/SKILL.md`.
+- Наявність навички `@build-and-test` (`.github/skills/build-and-test/SKILL.md`).
 
 ## Цільові файли та каталоги
 - Файл `CMakeLists.txt`
@@ -42,4 +42,4 @@ description: "Генерація CMakeLists.txt та налаштування ю
 - `ctest --test-dir build -C Release --output-on-failure`
 
 ## Обробка помилок
-- У разі помилки вивести: "Помилка /create-build: синтаксична помилка у CMakeLists.txt або збій компіляції таргету project_tests."
+- У разі помилки вивести: "Помилка @create-build.prompt.md: синтаксична помилка у CMakeLists.txt або збій компіляції таргету project_tests."

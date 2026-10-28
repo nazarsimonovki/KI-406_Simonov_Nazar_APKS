@@ -2,11 +2,11 @@
 description: "Генерація структури каталогів та вихідного коду C++ Hello World"
 ---
 
-# /create-project
+# @create-project.prompt.md
 
 ## Передумови
-- Успішне виконання команди `/git-init`.
-- Наявність маніфесту `.github/agents/build-engineer.agent.md` та навички `.github/skills/project-scaffold/SKILL.md`.
+- Успішне виконання інструкції `@git-init.prompt.md`.
+- Наявність маніфесту `.github/agents/build-engineer.agent.md` та навички `@project-scaffold` (`.github/skills/project-scaffold/SKILL.md`).
 
 ## Цільові файли та каталоги
 - Каталог `src/`
@@ -46,4 +46,4 @@ description: "Генерація структури каталогів та ви
 - Перевірка наявності файлів `src/main.cpp`, `src/addition.hpp` та каталогів `tests/`, `docs/`.
 
 ## Обробка помилок
-- У разі відсутності будь-якого з цільових файлів вивести: "Помилка /create-project: не вдалося створити вихідні файли коду або файлову структуру проєкту."
+- У разі відсутності будь-якого з цільових файлів вивести: "Помилка @create-project.prompt.md: не вдалося створити вихідні файли коду або файлову структуру проєкту."

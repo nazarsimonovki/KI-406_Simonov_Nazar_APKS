@@ -2,12 +2,12 @@
 description: "Генерація GitHub Actions CI/CD workflow та скриптів автоматизації ci.bat і ci.sh"
 ---
 
-# /create-actions
+# @create-actions.prompt.md
 
 ## Передумови
-- Успішне виконання команди `/create-build`.
+- Успішне виконання інструкції `@create-build.prompt.md`.
 - Локальна збірка та тести проходять без помилок.
-- Наявність навички `.github/skills/github-actions/SKILL.md`.
+- Наявність навички `@github-actions` (`.github/skills/github-actions/SKILL.md`).
 
 ## Цільові файли та каталоги
 - Каталог `.github/workflows/`
@@ -54,4 +54,4 @@ description: "Генерація GitHub Actions CI/CD workflow та скрипт
 - Синтаксична валідація YAML у `.github/workflows/ci.yml`.
 
 ## Обробка помилок
-- У разі виникнення збою вивести: "Помилка /create-actions: не вдалося згенерувати скрипти складання або валідний файл .github/workflows/ci.yml."
+- У разі виникнення збою вивести: "Помилка @create-actions.prompt.md: не вдалося згенерувати скрипти складання або валідний файл .github/workflows/ci.yml."

@@ -1,34 +1,47 @@
-# Інструкція з використання слеш-команд та збірки проєкту
+# Інструкція з використання команд агента та збірки проєкту
 
-## 1. Робота зі слеш-командами в GitHub Copilot Chat
+## 1. Запуск команд через символ @ (равлик) у GitHub Copilot Chat
 
-Усі команди агента реалізовані як інтерактивні слеш-команди через prompt-файли формату `.github/prompts/<назва>.prompt.md`. Вони автоматично реєструються середовищем VS Code та відображаються у випадаючому списку автодоповнення при введенні символу `/` у чаті.
+Виклик команд та навичок агента здійснюється не через слеш-команди (`/`), а через механізм звернення до файлів за допомогою символу `@` (равлик) у полі введення GitHub Copilot Chat. Це дозволяє однозначно передавати файл інструкції чи навички в контекст запиту без конфліктів із вбудованими командами Copilot.
 
 ### Порядок роботи:
-1. Відкрити кореневу директорію репозиторію у VS Code.
+1. Відкрити кореневу директорію проєкту у VS Code.
 2. Відкрити панель GitHub Copilot Chat.
-3. Ввести `/` у полі введення та обрати цільову команду:
+3. У полі чату ввести символ `@` (равлик) та обрати або ввести назву потрібного файлу команди чи навички:
 
-| Слеш-команда | Файл конфігурації | Опис та призначення |
+| Звернення через @ | Цільовий файл інструкції | Призначення |
 | :--- | :--- | :--- |
-| `/init` | `.github/prompts/init.prompt.md` | Оркестратор. Послідовно запускає `/git-init`, `/create-project`, `/create-build`, `/create-actions`, `/check`. |
-| `/git-init` | `.github/prompts/git-init.prompt.md` | Перевіряє наявність `.git/`, виконує `git init` та формує `.gitignore`. |
-| `/create-project` | `.github/prompts/create-project.prompt.md` | Створює каталоги `src/`, `tests/`, `docs/`, вихідний файл `src/main.cpp` та `src/addition.hpp`. |
-| `/create-build` | `.github/prompts/create-build.prompt.md` | Генерує кореневий `CMakeLists.txt` та файл модульного тесту `tests/test_main.cpp`. |
-| `/create-actions` | `.github/prompts/create-actions.prompt.md` | Генерує робочий процес `.github/workflows/ci.yml`, а також скрипти `ci.bat` та `ci.sh`. |
-| `/check` | `.github/prompts/check.prompt.md` | Виконує перевірку файлової структури, компіляцію у Release, запуск CTest та аналіз індексу Git. |
+| `@init.prompt.md` | `.github/prompts/init.prompt.md` | Оркестратор. Послідовно запускає `@git-init.prompt.md`, `@create-project.prompt.md`, `@create-build.prompt.md`, `@create-actions.prompt.md`, `@check.prompt.md`. |
+| `@git-init.prompt.md` | `.github/prompts/git-init.prompt.md` | Перевіряє стан Git, ініціалізує сховище та формує `.gitignore`. |
+| `@create-project.prompt.md` | `.github/prompts/create-project.prompt.md` | Викликає навичку `@project-scaffold`, створює каталоги `src/`, `tests/`, `docs/`, вихідні файли `src/main.cpp` та `src/addition.hpp`. |
+| `@create-build.prompt.md` | `.github/prompts/create-build.prompt.md` | Викликає навичку `@build-and-test`, генерує `CMakeLists.txt` та файл тесту `tests/test_main.cpp`. |
+| `@create-actions.prompt.md` | `.github/prompts/create-actions.prompt.md` | Викликає навичку `@github-actions`, генерує workflow `.github/workflows/ci.yml` та скрипти `ci.bat`, `ci.sh`. |
+| `@check.prompt.md` | `.github/prompts/check.prompt.md` | Виконує статичну перевірку структури файлів, компіляцію у Release, запуск CTest та аналіз індексу Git. |
 
-### Приклад комплексного запуску
-Для повного автоматичного розгортання та перевірки проєкту достатньо відправити команду:
-```text
-/init
-```
+### Пряме звернення до модульних навичок (Skills):
+- `@project-scaffold` або посилання на файл `.github/skills/project-scaffold/SKILL.md`
+- `@build-and-test` або посилання на файл `.github/skills/build-and-test/SKILL.md`
+- `@github-actions` або посилання на файл `.github/skills/github-actions/SKILL.md`
+
+### Приклади запитів:
+- Запуск повного циклу розгортання:
+  ```text
+  @init.prompt.md
+  ```
+  або з повним контекстом агента:
+  ```text
+  @workspace Прочитай .github/agents/build-engineer.agent.md та виконай інструкцію @init.prompt.md
+  ```
+- Виконання окремого кроку:
+  ```text
+  Виконай інструкцію з файлу @create-build.prompt.md
+  ```
 
 ---
 
 ## 2. Локальне складання та тестування
 
-### Швидкий запуск через системні скрипти
+### Швидкий запуск через готові скрипти
 - Платформа Windows:
   ```cmd
   ci.bat

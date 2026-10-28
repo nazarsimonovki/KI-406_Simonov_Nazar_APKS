@@ -8,21 +8,22 @@
 2. Генерація вихідного коду програми на C++17 (`src/main.cpp`, `src/addition.hpp`) та модульних тестів (`tests/test_main.cpp`).
 3. Створення конфігурації CMake (`CMakeLists.txt`) з таргетом виконуваного файлу `hello` та таргетом тестів `project_tests`.
 4. Налаштування багатоплатформного CI/CD конвеєра (`.github/workflows/ci.yml`) для Windows, Linux та macOS із викликом зовнішніх скриптів `ci.bat` і `ci.sh`.
-5. Координація всіх операцій через набір інтерактивних слеш-команд та модульних навичок.
+5. Координація всіх операцій через набір файлів інструкцій (промптів) та модульних навичок, доступних для виклику через символ `@` (равлик).
 
-## Інтерактивні слеш-команди (GitHub Copilot Chat)
-Агент підтримує виклик через автодоповнення слеш-команд:
-- `/init` — запуск повного конвеєра ініціалізації та валідації (`.github/prompts/init.prompt.md`).
-- `/git-init` — ініціалізація Git та налаштування `.gitignore` (`.github/prompts/git-init.prompt.md`).
-- `/create-project` — створення вихідного коду та файлової структури (`.github/prompts/create-project.prompt.md`).
-- `/create-build` — генерація конфігурації CMakeLists.txt та тестів (`.github/prompts/create-build.prompt.md`).
-- `/create-actions` — створення workflow GitHub Actions та скриптів `ci.bat`/`ci.sh` (`.github/prompts/create-actions.prompt.md`).
-- `/check` — фінальна верифікація збірки, тестів та структури репозиторію (`.github/prompts/check.prompt.md`).
+## Команди агента (виклик через @ у GitHub Copilot Chat)
+Агент підтримує виклик через механізм згадування файлів інструкцій (промптів) та навичок:
+- `@init.prompt.md` — запуск повного конвеєра ініціалізації та валідації (`.github/prompts/init.prompt.md`).
+- `@git-init.prompt.md` — ініціалізація Git та налаштування `.gitignore` (`.github/prompts/git-init.prompt.md`).
+- `@create-project.prompt.md` — створення вихідного коду та файлової структури (`.github/prompts/create-project.prompt.md`).
+- `@create-build.prompt.md` — генерація конфігурації CMakeLists.txt та тестів (`.github/prompts/create-build.prompt.md`).
+- `@create-actions.prompt.md` — створення workflow GitHub Actions та скриптів `ci.bat`/`ci.sh` (`.github/prompts/create-actions.prompt.md`).
+- `@check.prompt.md` — фінальна верифікація збірки, тестів та структури репозиторію (`.github/prompts/check.prompt.md`).
 
 ## Модульні навички (Skills)
-- `project-scaffold` (`.github/skills/project-scaffold/SKILL.md`) — структура файлів та шаблони коду.
-- `build-and-test` (`.github/skills/build-and-test/SKILL.md`) — збірка CMake та інтеграція GoogleTest.
-- `github-actions` (`.github/skills/github-actions/SKILL.md`) — налаштування матриці CI та збереження артефактів.
+Викликаються через згадування назви або шляху:
+- `@project-scaffold` (`.github/skills/project-scaffold/SKILL.md`) — структура файлів та шаблони коду.
+- `@build-and-test` (`.github/skills/build-and-test/SKILL.md`) — збірка CMake та інтеграція GoogleTest.
+- `@github-actions` (`.github/skills/github-actions/SKILL.md`) — налаштування матриці CI та збереження артефактів.
 
 ## Правила роботи з файлами
 1. **Ідемпотентність:** перевіряти наявність цільового файлу перед створенням. Повторний виклик не повинен призводити до дублювання або пошкодження валідних конфігурацій.
@@ -37,7 +38,7 @@
    - Команди-промпти: `.github/prompts/*.prompt.md`
    - Навички: `.github/skills/*/SKILL.md`
 3. **Чистота репозиторію:** заборонено додавати до Git каталог `build/`, системні кеші, файли бази налагодження (`*.pdb`, `*.idb`, `*.ilk`), бінарні файли (`*.exe`, `*.obj`, `*.o`) та директорії середовищ розробки (`.vs/`).
-4. **Цільова відповідність:** кожна зміна файлової системи має відповідати вимогам викликаної команди.
+4. **Цільова відповідність:** кожна зміна файлової системи має відповідати вимогам викликаної інструкції.
 
 ## Обмеження безпеки та заборонені дії
 1. **Безпека:** суворо заборонено створювати, читати, передавати або фіксувати у коді й конфігураціях паролі, персональні токени доступу, секретні ключі та облікові дані.
@@ -46,8 +47,8 @@
 
 ## Критерії готовності
 1. Усі файли маніфесту, команд та навичок відповідають специфікації.
-2. Команда `/init` послідовно виконує всі етапи з кодом повернення 0.
+2. Команда `@init.prompt.md` послідовно виконує всі етапи з кодом повернення 0.
 3. Проєкт успішно збирається локально за допомогою CMake (`hello.exe` формується в `build/Release/`).
 4. Модульний тест `BasicAddition` успішно виконується через CTest.
 5. Матриця CI workflow охоплює Ubuntu, Windows і macOS та успішно проходить перевірку.
-6. Команда `/check` підтверджує відсутність артефактів збірки в індексі Git.
+6. Команда `@check.prompt.md` підтверджує відсутність артефактів збірки в індексі Git.
